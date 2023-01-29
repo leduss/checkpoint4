@@ -1,12 +1,9 @@
-import Home from "./pages/Home";
-
-import "./App.css";
+import "./Tailwind.css";
 
 function App() {
   return (
     <div className="App">
-      <Home />
-      <p>coucou</p>
+      <p className="text-yellow-400">coucou</p>
     </div>
   );
 }
