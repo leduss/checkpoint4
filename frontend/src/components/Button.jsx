@@ -11,8 +11,8 @@ function Button({ type, className, handleClick, label }) {
 }
 Button.propTypes = {
   type: PropTypes.arrayOf(["button", "submit", "reset"]).isRequired,
-  label: PropTypes.string.isRequired,
-  handleClick: PropTypes.func.isRequired,
-  className: PropTypes.string.isRequired,
+  label: PropTypes.objectOf.isRequired,
+  handleClick: PropTypes.objectOf.isRequired,
+  className: PropTypes.objectOf.isRequired,
 };
 export default Button;

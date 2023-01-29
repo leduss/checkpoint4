@@ -1,0 +1,67 @@
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (error === "") {
+      axios
+        .post(
+          "http://localhost:8000/api/users/new",
+          {
+            firstname: data.firstname,
+            lastname: data.lastname,
+            email: data.email,
+            password: data.password,
+          },
+          { withCredentials: true }
+        )
+        .then((res) => {
+          if (res.status === 201) {
+            toast("Votre compte a bien été créé !", {
+              type: "success",
+              position: "top-left",
+              autoClose: 3000,
+              theme: "colored",
+              transition: Slide,
+              style: {
+                fontSize: "1.2em",
+                textAlign: "center",
+                width: "30vw",
+              },
+            });
+            setData({
+              email: "",
+              password: "",
+              passwordConfirm: "",
+              firstname: "",
+              lastname: "",
+            });
+          }
+        })
+        .catch(() =>
+          toast("Une erreur est survenue, veuillez réessayer.", {
+            type: "error",
+            position: "top-left",
+            autoClose: 3000,
+            theme: "colored",
+            transition: Slide,
+            style: {
+              fontSize: "1.2em",
+              textAlign: "center",
+              width: "30vw",
+            },
+          })
+        );
+    } else {
+      toast("Vos mots de passe ne correspondent pas", {
+        type: "warning",
+        position: "top-left",
+        autoClose: 3000,
+        theme: "colored",
+        transition: Slide,
+        style: {
+          fontSize: "1.2em",
+          textAlign: "center",
+          color: "black",
+          width: "30vw",
+        },
+      });
+    }
+  };

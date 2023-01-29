@@ -7,11 +7,11 @@ function LoginPage({ setWelcomeMessageLogin, setColor, color }) {
   const changeColor = () => {
     switch (location.pathname) {
       case "/":
-        setColor("bg-gradient-to-r from-green-400 to-blue-500");
+        setColor("bg-gradient-to-r from-green-500 to-blue-500");
         setWelcomeMessageLogin("Connectez-vous");
         break;
       case "/signup":
-        setColor("bg-gradient-to-r from-pink-500 to-yellow-400");
+        setColor("bg-gradient-to-r from-red-500 to-yellow-400");
         setWelcomeMessageLogin("Créez votre compte");
         break;
       default:
@@ -26,10 +26,20 @@ function LoginPage({ setWelcomeMessageLogin, setColor, color }) {
       <div className="w-5/12 h-screen bg-white flex flex-col items-center justify-center">
         <Outlet />
       </div>
-      <div className={`w-8/12 rounded-l-3xl h-full z-50 ${color}`}>
-        <div className="bg-white w-2/4 h-2/4 flex m-auto mt-36 rounded-3xl bg-opacity-10">
-          <p className="flex items-center m-auto text-black opacity-100">fds</p>
+      <div
+        className={`w-8/12 rounded-l-3xl h-full z-50 flex justify-center items-center ${color} relative`}
+      >
+        <div className="bg-white/10 backdrop-blur w-2/4 h-2/4 rounded-3xl flex justify-center items-center">
+          <p className="flex items-center m-auto font-black opacity-100 text-6xl">
+            Bienvenue
+          </p>
         </div>
+        <div
+          className={`w-20 h-20 ${color} absolute right-56 top-56 -z-10 rounded-full `}
+        />
+        <div
+          className={`w-20 h-20 ${color} absolute left-56 bottom-56 -z-10 rounded-full`}
+        />
       </div>
     </div>
   );

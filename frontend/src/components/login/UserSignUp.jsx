@@ -1,22 +1,24 @@
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
-import axios from "axios";
 import dataInput from "@components/login/dataInput";
 import Button from "@components/Button";
-import { ToastContainer, toast, Slide } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Link } from "react-router-dom";
 import { PropTypes } from "prop-types";
+import { useDispatch } from "react-redux";
+import { toast, ToastContainer, Slide } from "react-toastify";
+import { signIn } from "../../redux/authSlice";
 
 function UserSignUp({ welcomeMessageLogin, color }) {
+  const dispatch = useDispatch();
   const [data, setData] = useState({
     firstname: "",
     lastname: "",
     email: "",
     password: "",
-    passwordConfirm: "",
   });
+  const [passwordConfirm, setPasswordConfirm] = useState("");
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -29,26 +31,16 @@ function UserSignUp({ welcomeMessageLogin, color }) {
     });
   };
   useEffect(() => {
-    if (data.passwordConfirm && data.password !== data.passwordConfirm) {
+    if (passwordConfirm && data.password !== passwordConfirm) {
       setError("Les mots de passes ne correspondent pas.");
     } else {
       setError("");
     }
   }, [data]);
   const handleSubmit = (event) => {
-    event.preventDefault();
     if (error === "") {
-      axios
-        .post(
-          "http://localhost:8000/api/users/new",
-          {
-            firstname: data.firstname,
-            lastname: data.lastname,
-            email: data.email,
-            password: data.password,
-          },
-          { withCredentials: true }
-        )
+      event.preventDefault();
+      dispatch(signIn(data))
         .then((res) => {
           if (res.status === 201) {
             toast("Votre compte a bien été créé !", {
@@ -60,7 +52,6 @@ function UserSignUp({ welcomeMessageLogin, color }) {
               style: {
                 fontSize: "1.2em",
                 textAlign: "center",
-                width: "30vw",
               },
             });
             setData({
@@ -72,8 +63,8 @@ function UserSignUp({ welcomeMessageLogin, color }) {
             });
           }
         })
-        .catch(() =>
-          toast("Une erreur est survenue, veuillez réessayer.", {
+        .catch(() => {
+          toast("Une erreur est survenue !", {
             type: "error",
             position: "top-left",
             autoClose: 3000,
@@ -82,13 +73,12 @@ function UserSignUp({ welcomeMessageLogin, color }) {
             style: {
               fontSize: "1.2em",
               textAlign: "center",
-              width: "30vw",
             },
-          })
-        );
+          });
+        });
     } else {
-      toast("Vos mots de passe ne correspondent pas", {
-        type: "warning",
+      toast("Les mots de passes ne correspondent pas !", {
+        type: "error",
         position: "top-left",
         autoClose: 3000,
         theme: "colored",
@@ -96,8 +86,6 @@ function UserSignUp({ welcomeMessageLogin, color }) {
         style: {
           fontSize: "1.2em",
           textAlign: "center",
-          color: "black",
-          width: "30vw",
         },
       });
     }
@@ -133,11 +121,11 @@ function UserSignUp({ welcomeMessageLogin, color }) {
         <div className="relative w-full">
           <input
             className={`appearance-none border-2 ${
-              data.passwordConfirm && !error && "border-green-500 border-2"
+              passwordConfirm && !error && "border-green-500 border-2"
             } ${
               error && "border-red-500 border-2"
             } rounded-md h-10 pl-3 outline-none border-2 border-black w-full leading-tight focus:outline-none focus:shadow-outline ${
-              data.passwordConfirm &&
+              passwordConfirm &&
               !error &&
               "focus:border-green-500 focus:border-2"
             } ${error && "focus:border-red-500 focus:border-2"}`}
@@ -168,19 +156,19 @@ function UserSignUp({ welcomeMessageLogin, color }) {
         <div className="relative w-full h-16">
           <input
             className={`appearance-none border-2 ${
-              data.passwordConfirm && !error && "border-green-500 border-2"
+              passwordConfirm && !error && "border-green-500 border-2"
             } ${
               error && "border-red-500 border-2"
             } rounded-md h-10 pl-3 outline-none border-2 border-black w-full leading-tight focus:outline-none focus:shadow-outline ${
-              data.passwordConfirm &&
+              passwordConfirm &&
               !error &&
               "focus:border-green-500 focus:border-2"
             } ${error && "focus:border-red-500 focus:border-2"}`}
             type={showConfirmPassword ? "text" : "password"}
             id="password-confirm"
             name="passwordConfirm"
-            value={data.passwordConfirm}
-            onChange={handleChange}
+            onChange={(event) => setPasswordConfirm(event.target.value)}
+            value={passwordConfirm}
             placeholder="Confirmez votre mot de passe"
           />
           <button
@@ -201,7 +189,7 @@ function UserSignUp({ welcomeMessageLogin, color }) {
       </div>
       <Button
         handleClick=""
-        className={`m-auto w-3/4 ${color} shadow-md shadow-gray-400 text-white text-lg font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 hover:shadow-gray-400 hover:shadow-md active:scale-100 active:shadow-md active:shadow-gray-400`}
+        className={`m-auto w-3/4 ${color} shadow-md shadow-gray-400 text-white text-xl font-black py-2 px-4 rounded-full focus:outline-none focus:shadow-outline transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 hover:shadow-gray-400 hover:shadow-md active:scale-100 active:shadow-md active:shadow-gray-400`}
         label={welcomeMessageLogin}
         type="submit"
       />

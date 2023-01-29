@@ -5,12 +5,31 @@ import Button from "@components/Button";
 import "react-toastify/dist/ReactToastify.css";
 import { Link } from "react-router-dom";
 import { PropTypes } from "prop-types";
+import { useDispatch } from "react-redux";
+import { login } from "../../redux/authSlice";
 
 function Login({ welcomeMessageLogin, color }) {
+  const dispatch = useDispatch();
+  const [dataLogin, setDataLogin] = useState({
+    email: "",
+    password: "",
+  });
+  const handleChange = (event) => {
+    setDataLogin((prevFormData) => {
+      return {
+        ...prevFormData,
+        [event.target.name]: event.target.value,
+      };
+    });
+  };
+  const handleLogin = (event) => {
+    event.preventDefault();
+    dispatch(login({ dataLogin }));
+  };
   const [showPassword, setShowPassword] = useState(false);
   return (
     <form
-      onSubmit=""
+      onSubmit={handleLogin}
       className="w-2/3 h-3/6 flex flex-col justify-center m-auto relative gap-5"
     >
       <h1 className="text-3xl font-black">{welcomeMessageLogin}</h1>
@@ -23,8 +42,8 @@ function Login({ welcomeMessageLogin, color }) {
           className="rounded-md h-10 pl-3 outline-none border-2 border-black w-full"
           placeholder="Votre email"
           name="email"
-          onChange=""
-          value=""
+          onChange={handleChange}
+          value={dataLogin.email}
         />
       </div>
       <div className="w-full flex flex-col gap-1">
@@ -37,8 +56,8 @@ function Login({ welcomeMessageLogin, color }) {
             type={showPassword ? "text" : "password"}
             id="password"
             name="password"
-            value=""
-            onChange=""
+            value={dataLogin.password}
+            onChange={handleChange}
             placeholder="Votre mot de passe"
           />{" "}
           <button
@@ -56,7 +75,7 @@ function Login({ welcomeMessageLogin, color }) {
       </div>
       <Button
         handleClick=""
-        className={`m-auto w-3/4 ${color} text-lg shadow-md shadow-gray-400 text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 hover:shadow-gray-400 hover:shadow-md active:scale-100 active:shadow-md active:shadow-gray-400`}
+        className={`m-auto w-3/4 ${color} text-xl shadow-md shadow-gray-400 text-white font-black py-2 px-4 rounded-full focus:outline-none focus:shadow-outline transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 hover:shadow-gray-400 hover:shadow-md active:scale-100 active:shadow-md active:shadow-gray-400`}
         label={welcomeMessageLogin}
         type="submit"
       />

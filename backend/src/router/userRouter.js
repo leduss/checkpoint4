@@ -10,7 +10,7 @@ const {
 const credentialsCheck = require("../middleware/credentialsCheck");
 const authorization = require("../helpers/authentication");
 
-userRouter.post("/new", credentialsCheck, addUser);
+userRouter.post("/signIn", credentialsCheck, addUser);
 
 userRouter.post("login", credentialsCheck, userLogin);
 userRouter.get("/logout", authorization, userLogout);

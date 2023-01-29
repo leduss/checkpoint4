@@ -9,7 +9,7 @@ function App() {
   const [welcomeMessageLogin, setWelcomeMessageLogin] = useState("");
   const [color, setColor] = useState("");
   return (
-    <div className="">
+    <div className="text-zinc-700">
       <Routes>
         <Route
           path="/"
