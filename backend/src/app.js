@@ -8,8 +8,9 @@ const app = express();
 
 app.use(
   cors({
-    origin: process.env.YOUR_FRONTEND_URL ?? "http://localhost:3000",
+    origin: process.env.FRONTEND_URL ?? "http://localhost:3000",
     optionsSuccessStatus: 200,
+    credentials: true,
   })
 );
 
@@ -19,7 +20,7 @@ app.use(express.static(path.join(__dirname, "../public")));
 
 app.use(express.static(path.join(__dirname, "..", "..", "frontend", "dist")));
 
-app.use(router);
+app.use("/api", router);
 
 const reactIndexFile = path.join(
   __dirname,

@@ -49,10 +49,10 @@ const userController = {
                 httpOnly: true,
                 secure: false,
               })
-              .status(200)
+              .status(201)
               .send({ id, firstname, lastname, email });
           } else {
-            res.status(401).send({ error: "Invalid password." });
+            res.status(401).send({ error: "Mot de passe invalide" });
           }
         }
       })
