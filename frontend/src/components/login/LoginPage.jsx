@@ -6,11 +6,11 @@ function LoginPage({ setWelcomeMessageLogin, setColor, color }) {
   const location = useLocation();
   const changeColor = () => {
     switch (location.pathname) {
-      case "/":
+      case "/connexion/login":
         setColor("bg-gradient-to-r from-green-500 to-blue-500");
         setWelcomeMessageLogin("Connectez-vous");
         break;
-      case "/signup":
+      case "/connexion/signup":
         setColor("bg-gradient-to-r from-red-500 to-yellow-400");
         setWelcomeMessageLogin("Créez votre compte");
         break;
@@ -22,7 +22,7 @@ function LoginPage({ setWelcomeMessageLogin, setColor, color }) {
     changeColor();
   }, [location.pathname]);
   return (
-    <div className="w-screen h-screen flex bg-white">
+    <div className="w-screen h-screen flex bg-white absolute right-0 z-50">
       <div className="w-5/12 h-screen bg-white flex flex-col items-center justify-center">
         <Outlet />
       </div>

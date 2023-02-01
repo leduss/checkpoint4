@@ -1,14 +1,14 @@
-const userModel = require("../models/user");
+const logModel = require("../models/log");
 const { passwordHash, passwordVerify } = require("../helpers/password");
 const { jwtSign } = require("../helpers/jwt");
 
-const userController = {
+const logControllers = {
   addUser: async (req, res, next) => {
     const userData = req.body;
     try {
       const hash = await passwordHash(userData.password);
 
-      userModel
+      logModel
         .createUser({ ...userData, password: hash, role_id: 2 })
         .then((result) => {
           res.status(201).send({
@@ -25,7 +25,7 @@ const userController = {
   },
   userLogin: (req, res, next) => {
     const { email, password } = req.body;
-    userModel
+    logModel
       .findUserByEmail(email)
       .then(async ([user]) => {
         if (!user) {
@@ -63,4 +63,4 @@ const userController = {
   },
 };
 
-module.exports = userController;
+module.exports = logControllers;

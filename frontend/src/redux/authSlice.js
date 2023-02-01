@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 const initialState = {
-  user: "",
+  log: "",
   msg: "",
   token: "",
   loading: false,
@@ -49,7 +49,7 @@ export const authSlice = createSlice({
         // eslint-disable-next-line no-param-reassign
         state.token = token;
         // eslint-disable-next-line no-param-reassign
-        state.user = user;
+        state.log = user;
         localStorage.setItem("msg", msg);
         localStorage.setItem("token", token);
         localStorage.setItem("user", JSON.stringify(user));
@@ -81,7 +81,7 @@ export const authSlice = createSlice({
     },
   },
   initialState,
-  name: "user",
+  name: "log",
   reducers: {
     addToken: (state) => {
       // eslint-disable-next-line no-param-reassign
