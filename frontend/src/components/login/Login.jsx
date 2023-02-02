@@ -2,15 +2,11 @@ import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import Button from "@components/Button";
-import "react-toastify/dist/ReactToastify.css";
 import { Link, useNavigate } from "react-router-dom";
 import { PropTypes } from "prop-types";
-import { useDispatch } from "react-redux";
-import { login } from "../../redux/authSlice";
 
 function Login({ welcomeMessageLogin, color }) {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const [dataLogin, setDataLogin] = useState({
     email: "",
     password: "",
@@ -23,16 +19,9 @@ function Login({ welcomeMessageLogin, color }) {
       };
     });
   };
-  const handleLogin = (event) => {
-    event.preventDefault();
-    dispatch(login({ dataLogin }));
-  };
   const [showPassword, setShowPassword] = useState(false);
   return (
-    <form
-      onSubmit={handleLogin}
-      className="w-2/3 h-3/6 flex flex-col justify-center m-auto relative gap-5 text-gray-900"
-    >
+    <form className="w-2/3 h-3/6 flex flex-col justify-center m-auto relative gap-5 text-gray-900">
       <h1 className="text-2xl font-black">{welcomeMessageLogin}</h1>
       <div className="w-full flex flex-col gap-1">
         <label className="text-sm" htmlFor="email">

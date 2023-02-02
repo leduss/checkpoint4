@@ -1,10 +1,10 @@
-const doctorModel = require("../models/doctor");
+const laboModel = require("../models/labo");
 
-const doctorController = {
-  getDoctorByUserId: (req, res, next) => {
+const laboController = {
+  getLaboByUserId: (req, res, next) => {
     const { id } = req.params;
-    doctorModel
-      .findDoctorByUserId(id)
+    laboModel
+      .findLaboByUserId(id)
       .then(([result]) => {
         if (result.length === 0) {
           res.sendStatus(404);
@@ -14,11 +14,11 @@ const doctorController = {
       })
       .catch((err) => next(err));
   },
-  updateDoctor: (req, res) => {
-    const doctorData = req.body;
+  updateLabo: (req, res) => {
+    const laboData = req.body;
     const { id } = req.params;
-    doctorModel
-      .updateOneDoctor(doctorData, id)
+    laboModel
+      .updateOneLabo(laboData, id)
       .then((doctor) => {
         if (doctor.affectedRows !== 0) {
           res.status(201).send({ message: "Mis à jour! 😀" });
@@ -32,4 +32,4 @@ const doctorController = {
   },
 };
 
-module.exports = doctorController;
+module.exports = laboController;

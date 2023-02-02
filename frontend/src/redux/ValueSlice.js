@@ -13,8 +13,12 @@ export const valueSlice = createSlice({
     addValue: (state, { payload }) => {
       state.values.push(payload);
     },
+    deleteValue: (state, { payload }) => {
+      // eslint-disable-next-line no-param-reassign
+      state.values = state.values.filter((value) => value.id !== payload);
+    },
   },
 });
 
-export const { getValue, addValue } = valueSlice.actions;
+export const { getValue, addValue, deleteValue } = valueSlice.actions;
 export default valueSlice.reducer;

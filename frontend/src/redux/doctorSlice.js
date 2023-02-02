@@ -10,9 +10,20 @@ export const doctorSlice = createSlice({
       // eslint-disable-next-line no-param-reassign
       state.doctors = action.payload;
     },
+    editDoctor: (state, { payload }) => {
+      // eslint-disable-next-line no-param-reassign
+      state.doctor = state.doctor.map((oneDoctor) => {
+        if (oneDoctor.id === payload[1]) {
+          return {
+            ...oneDoctor,
+            doctors: payload[0],
+          };
+        }
+        return oneDoctor;
+      });
+    },
   },
 });
-
-export const { getDoctor } = doctorSlice.actions;
+export const { getDoctor, editDoctor } = doctorSlice.actions;
 
 export default doctorSlice.reducer;

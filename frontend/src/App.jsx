@@ -7,6 +7,8 @@ import { useState } from "react";
 import NavBar from "@components/NavBar/NavBar";
 import BigContainer from "@components/BigContainer";
 import DashBoard from "@components/DashBoard/DashBoard";
+import Account from "@components/Account";
+import Forum from "@components/Forum";
 
 function App() {
   const [welcomeMessageLogin, setWelcomeMessageLogin] = useState("");
@@ -43,6 +45,8 @@ function App() {
         </Route>
         <Route path="home" element={<BigContainer />}>
           <Route path="dashboard" element={<DashBoard />} />
+          <Route path="compte" element={<Account />} />
+          <Route path="forum" element={<Forum />} />
         </Route>
       </Routes>
     </div>

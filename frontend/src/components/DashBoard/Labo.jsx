@@ -2,37 +2,37 @@ import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { MdOutlineEdit, MdOutlineCheck } from "react-icons/all";
-import { getDoctor, editDoctor } from "../../redux/doctorSlice";
+import { getLabo, editlabo } from "../../redux/laboSlice";
 
-function Doctor() {
+function Labo() {
   const [edit, setEdit] = useState(false);
   const dispatch = useDispatch();
-  const getOneDoctor = useSelector((state) => state.doctor.doctors);
-  const nameLaboRef = useRef();
-  const adresseLaboRef = useRef();
-  const villeLaboRef = useRef();
-  const phoneLaboRef = useRef();
-  const oneDoctor = () => {
-    axios.get("http://localhost:8000/api/doctors/13").then((response) => {
-      dispatch(getDoctor(response.data));
+  const getOneLabo = useSelector((state) => state.labo.labos);
+  const nameRef = useRef();
+  const adresseRef = useRef();
+  const villeRef = useRef();
+  const phoneRef = useRef();
+  const oneLabo = () => {
+    axios.get("http://localhost:8000/api/labos/13").then((response) => {
+      dispatch(getLabo(response.data));
     });
   };
   useEffect(() => {
-    oneDoctor();
+    oneLabo();
   }, []);
   const handleSubmit = () => {
     setEdit(false);
 
     const data = {
-      namedoctor: nameLaboRef.current.value,
-      adressedoctor: adresseLaboRef.current.value,
-      villedoctor: villeLaboRef.current.value,
-      teldoctor: phoneLaboRef.current.value,
+      namelabo: nameRef.current.value,
+      adresselabo: adresseRef.current.value,
+      villelabo: villeRef.current.value,
+      tellabo: phoneRef.current.value,
     };
     axios
-      .put(`http://localhost:8000/api/doctors/${getOneDoctor.id}`, data)
+      .put(`http://localhost:8000/api/labos/${getOneLabo.id}`, data)
       .then(() => {
-        dispatch(editDoctor([data, getOneDoctor.id]));
+        dispatch(editlabo([data, getOneLabo.id]));
       });
   };
   const handleClick = () => {
@@ -40,7 +40,7 @@ function Doctor() {
   };
   return (
     <div className="w-full h-full bg-yellow-400 rounded-2xl bg-[#262837] flex flex-col gap-3 py-4 text-white relative p-2">
-      <h4 className="text-xl text-center underline">Mon docteur</h4>
+      <h4 className="text-xl text-center underline">Mon labo</h4>
       {edit ? (
         <button
           type="button"
@@ -62,54 +62,47 @@ function Doctor() {
         <div className="flex flex-col items-center gap-2 w-full text-gray-900">
           <input
             type="text"
-            className="w-[80%] h-6 rounded-lg pl-3"
-            defaultValue={getOneDoctor.namedoctor || "Nom de votre docteur"}
-            ref={nameLaboRef}
+            className="w-[80%] h-6 rounded-lg px-3"
+            defaultValue={getOneLabo.namelabo}
+            ref={nameRef}
           />
           <input
             type="text"
             className="w-[80%] h-6 rounded-lg pl-3"
-            defaultValue={getOneDoctor.adressedoctor || "Son adresse"}
-            ref={adresseLaboRef}
+            defaultValue={getOneLabo.adresselabo}
+            ref={adresseRef}
           />
           <input
             type="text"
             className="w-[80%] h-6 rounded-lg pl-3"
-            defaultValue={getOneDoctor.villedoctor || "Sa ville"}
-            ref={villeLaboRef}
+            defaultValue={getOneLabo.villelabo}
+            ref={villeRef}
           />
           <input
             type="text"
             className="w-[80%] h-6 rounded-lg pl-3"
-            defaultValue={getOneDoctor.teldoctor || "Son numéro de téléphone"}
-            ref={phoneLaboRef}
+            defaultValue={getOneLabo.tellabo}
+            ref={phoneRef}
           />
         </div>
       ) : (
         <div className="flex flex-col gap-2">
           <p className="text-md">
-            Dr{" "}
-            {nameLaboRef.current
-              ? nameLaboRef.current.value
-              : getOneDoctor.namedoctor}
+            {nameRef.current ? nameRef.current.value : getOneLabo.namelabo}
           </p>
           <p className="text-md">
             Adresse:{" "}
-            {adresseLaboRef.current
-              ? adresseLaboRef.current.value
-              : getOneDoctor.adressedoctor}
+            {adresseRef.current
+              ? adresseRef.current.value
+              : getOneLabo.adresselabo}
           </p>
           <p className="text-md">
             Ville:{" "}
-            {villeLaboRef.current
-              ? villeLaboRef.current.value
-              : getOneDoctor.villedoctor}
+            {villeRef.current ? villeRef.current.value : getOneLabo.villelabo}
           </p>
           <p className="text-md">
             Téléphone:{" "}
-            {phoneLaboRef.current
-              ? phoneLaboRef.current.value
-              : getOneDoctor.teldoctor}
+            {phoneRef.current ? phoneRef.current.value : getOneLabo.tellabo}
           </p>
         </div>
       )}
@@ -117,4 +110,4 @@ function Doctor() {
   );
 }
 
-export default Doctor;
+export default Labo;

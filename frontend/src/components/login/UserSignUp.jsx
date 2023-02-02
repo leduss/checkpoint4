@@ -3,14 +3,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import dataInput from "@components/login/dataInput";
 import Button from "@components/Button";
-import "react-toastify/dist/ReactToastify.css";
 import { Link } from "react-router-dom";
 import { PropTypes } from "prop-types";
-import { useDispatch } from "react-redux";
-import { signIn } from "../../redux/authSlice";
 
 function UserSignUp({ welcomeMessageLogin, color }) {
-  const dispatch = useDispatch();
   const [data, setData] = useState({
     firstname: "",
     lastname: "",
@@ -36,17 +32,8 @@ function UserSignUp({ welcomeMessageLogin, color }) {
       setError("");
     }
   }, [data]);
-  const handleSubmit = (event) => {
-    if (error === "") {
-      event.preventDefault();
-      dispatch(signIn(data));
-    }
-  };
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="w-2/3 h-4/6 flex flex-col justify-center m-auto relative gap-5"
-    >
+    <form className="w-2/3 h-4/6 flex flex-col justify-center m-auto relative gap-5">
       <h1 className="text-2xl text-fontFamily-rubik font-black text-gray-900">
         {welcomeMessageLogin}
       </h1>
