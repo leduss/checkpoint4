@@ -39,7 +39,7 @@ function Value() {
     setEdit(!edit);
   };
   return (
-    <div className="w-full h-full bg-yellow-400 rounded-2xl bg-[#262837] flex flex-col gap-6 items-center justify-center py-4 text-white">
+    <div className="w-full h-full bg-yellow-400 rounded-2xl bg-[#262837] flex flex-col gap-6 py-4 text-white">
       <h4 className="text-xl text-center underline">
         Mes valeurs idéales doivent être situées entre:{" "}
       </h4>

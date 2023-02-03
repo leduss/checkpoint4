@@ -23,6 +23,7 @@ ChartJS.register(
 );
 
 function Graph() {
+  const getOneUser = useSelector((state) => state.user.users);
   const allValue = useSelector((state) => state.value.values);
   const option = {
     year: "numeric",
@@ -50,7 +51,7 @@ function Graph() {
       },
       title: {
         display: true,
-        text: "Mr Smith",
+        text: ` Mr ${getOneUser.lastname}`,
       },
     },
   };

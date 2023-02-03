@@ -31,7 +31,7 @@ function LastValue() {
     }
   }, [lastValue.valeur]);
   return (
-    <div className="w-full h-full rounded-2xl bg-[#262837] flex flex-col gap-6 items-center justify-center py-4 text-white">
+    <div className="w-full h-full rounded-2xl bg-[#262837] flex flex-col gap-6 items-center py-4 text-white">
       <h4 className="text-xl text-center underline">
         Ma dernière
         <br />
