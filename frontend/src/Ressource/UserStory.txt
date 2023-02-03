@@ -1,0 +1,4 @@
+En tant qu'utilisateur je peux rentrer mes résultats de mes bilans sanguins.
+En tant qu'utilisateur je peux voir ma courbe d'évolution.
+En tant qu'utilisateur je peux supprimer des résultats.
+En tant qu'utilisateur je peux rentrer mes valeurs de norme.
