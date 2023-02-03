@@ -12,7 +12,7 @@ export const laboSlice = createSlice({
     },
     editlabo: (state, { payload }) => {
       // eslint-disable-next-line no-param-reassign
-      state.labo = state.labo.map((oneLabo) => {
+      state.labos = state.labos.map((oneLabo) => {
         if (oneLabo.id === payload[1]) {
           return {
             ...oneLabo,

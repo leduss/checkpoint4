@@ -12,7 +12,7 @@ export const doctorSlice = createSlice({
     },
     editDoctor: (state, { payload }) => {
       // eslint-disable-next-line no-param-reassign
-      state.doctor = state.doctor.map((oneDoctor) => {
+      state.doctors = state.doctors.map((oneDoctor) => {
         if (oneDoctor.id === payload[1]) {
           return {
             ...oneDoctor,
