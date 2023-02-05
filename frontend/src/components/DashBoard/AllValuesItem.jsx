@@ -36,7 +36,7 @@ function AllValuesItem({ value }) {
       setColor("text-orange-400");
     } else {
       setWarning("");
-      setColor("text-[#4AC088]");
+      setColor("text-white");
     }
   }, [value]);
   return (
@@ -59,12 +59,7 @@ function AllValuesItem({ value }) {
   );
 }
 AllValuesItem.propTypes = {
-  // eslint-disable-next-line react/require-default-props
-  value: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    valeur: PropTypes.number.isRequired,
-    date: PropTypes.string.isRequired,
-  }),
+  value: PropTypes.objectOf.isRequired,
 };
 
 export default AllValuesItem;

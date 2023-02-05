@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { MdOutlineEdit } from "react-icons/all";
-import { getValue, editValue } from "../../redux/IdealValueSlice";
+import { editValue } from "../../redux/IdealValueSlice";
 
 function Value() {
   const [edit, setEdit] = useState(true);
@@ -10,14 +10,6 @@ function Value() {
   const maxRef = useRef();
   const dispatch = useDispatch();
   const getOneValue = useSelector((state) => state.idealValue.idealValues);
-  const oneValue = () => {
-    axios.get("http://localhost:8000/api/values/ideal/13").then((response) => {
-      dispatch(getValue(response.data));
-    });
-  };
-  useEffect(() => {
-    oneValue();
-  }, []);
   const handleSubmit = () => {
     setEdit(!edit);
     const data = {
@@ -39,7 +31,7 @@ function Value() {
     setEdit(!edit);
   };
   return (
-    <div className="w-full h-full bg-yellow-400 rounded-2xl bg-[#262837] flex flex-col gap-6 py-4 text-white">
+    <div className="w-full h-full bg-yellow-400 rounded-2xl bg-[#262837] flex flex-col gap-6 p-4 text-white">
       <h4 className="text-xl text-center underline">
         Mes valeurs idéales doivent être situées entre:{" "}
       </h4>

@@ -6,18 +6,17 @@ export const IdealValueSlice = createSlice({
     idealValues: [],
   },
   reducers: {
-    getValue: (state, action) => {
+    getValue: (state, { payload }) => {
       // eslint-disable-next-line no-param-reassign
-      state.idealValues = action.payload;
+      state.idealValues = payload;
     },
     editValue: (state, action) => {
       // eslint-disable-next-line no-param-reassign
-      state.idealValues = state.idealValues.map((oneValue) => {
-        if (oneValue.id === action.payload.id) {
+      state.idealValues.map((oneValue) => {
+        if (oneValue.id === action.payload[1]) {
           return {
             ...oneValue,
-            min: action.payload.min,
-            max: action.payload.max,
+            idealValues: action.payload[0],
           };
         }
         return oneValue;

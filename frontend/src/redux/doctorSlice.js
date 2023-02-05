@@ -10,16 +10,19 @@ export const doctorSlice = createSlice({
       // eslint-disable-next-line no-param-reassign
       state.doctors = action.payload;
     },
-    editDoctor: (state, { payload }) => {
+    editDoctor: (state) => {
       // eslint-disable-next-line no-param-reassign
-      state.doctors = state.doctors.map((oneDoctor) => {
-        if (oneDoctor.id === payload[1]) {
+      state.doctors = state.doctors.map((doctor) => {
+        if (doctor.id === state.payload.id) {
           return {
-            ...oneDoctor,
-            doctors: payload[0],
+            ...doctor,
+            namedoctor: state.payload,
+            adressedoctor: state.payload,
+            teldoctor: state.payload.teldoctor,
+            villedoctor: state.payload,
           };
         }
-        return oneDoctor;
+        return doctor;
       });
     },
   },

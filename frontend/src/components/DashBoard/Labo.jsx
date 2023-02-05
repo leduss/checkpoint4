@@ -8,10 +8,10 @@ function Labo() {
   const [edit, setEdit] = useState(false);
   const dispatch = useDispatch();
   const getOneLabo = useSelector((state) => state.labo.labos);
-  const nameRef = useRef();
-  const adresseRef = useRef();
-  const villeRef = useRef();
-  const phoneRef = useRef();
+  const nameLaboRef = useRef();
+  const adresseLaboRef = useRef();
+  const villeLaboRef = useRef();
+  const phoneLaboRef = useRef();
   const oneLabo = () => {
     axios.get("http://localhost:8000/api/labos/13").then((response) => {
       dispatch(getLabo(response.data));
@@ -24,10 +24,10 @@ function Labo() {
     setEdit(false);
 
     const data = {
-      namelabo: nameRef.current.value,
-      adresselabo: adresseRef.current.value,
-      villelabo: villeRef.current.value,
-      tellabo: phoneRef.current.value,
+      namelabo: nameLaboRef.current.value,
+      adresselabo: adresseLaboRef.current.value,
+      villelabo: villeLaboRef.current.value,
+      tellabo: phoneLaboRef.current.value,
     };
     axios
       .put(`http://localhost:8000/api/labos/${getOneLabo.id}`, data)
@@ -64,45 +64,51 @@ function Labo() {
             type="text"
             className="w-[80%] h-6 rounded-lg px-3"
             defaultValue={getOneLabo.namelabo}
-            ref={nameRef}
+            ref={nameLaboRef}
           />
           <input
             type="text"
             className="w-[80%] h-6 rounded-lg pl-3"
             defaultValue={getOneLabo.adresselabo}
-            ref={adresseRef}
+            ref={adresseLaboRef}
           />
           <input
             type="text"
             className="w-[80%] h-6 rounded-lg pl-3"
             defaultValue={getOneLabo.villelabo}
-            ref={villeRef}
+            ref={villeLaboRef}
           />
           <input
             type="text"
             className="w-[80%] h-6 rounded-lg pl-3"
             defaultValue={getOneLabo.tellabo}
-            ref={phoneRef}
+            ref={phoneLaboRef}
           />
         </div>
       ) : (
         <div className="flex flex-col gap-2">
           <p className="text-md">
-            {nameRef.current ? nameRef.current.value : getOneLabo.namelabo}
+            {nameLaboRef.current
+              ? nameLaboRef.current.value
+              : getOneLabo.namelabo}
           </p>
           <p className="text-md">
             Adresse:{" "}
-            {adresseRef.current
-              ? adresseRef.current.value
+            {adresseLaboRef.current
+              ? adresseLaboRef.current.value
               : getOneLabo.adresselabo}
           </p>
           <p className="text-md">
             Ville:{" "}
-            {villeRef.current ? villeRef.current.value : getOneLabo.villelabo}
+            {villeLaboRef.current
+              ? villeLaboRef.current.value
+              : getOneLabo.villelabo}
           </p>
           <p className="text-md">
             Téléphone:{" "}
-            {phoneRef.current ? phoneRef.current.value : getOneLabo.tellabo}
+            {phoneLaboRef.current
+              ? phoneLaboRef.current.value
+              : getOneLabo.tellabo}
           </p>
         </div>
       )}

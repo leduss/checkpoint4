@@ -21,17 +21,18 @@ function Input({ getAllValues }) {
     axios.post("http://localhost:8000/api/values", data).then(() => {
       dispatch(addValue(data));
       dispatch(getAllValues());
-      formRef.current.reset();
     });
+    valueRef.current.value = "";
+    dateRef.current.value = "";
   };
   return (
-    <div className="w-full flex flex-col items-center mt-2">
+    <div className="w-full flex flex-col items-center">
       <h1 className="text-white text-lg">Ajouter une valeur</h1>
       <div className="w-full">
         <form
           onSubmit={(e) => handleSubmit(e)}
           ref={formRef}
-          className="flex gap-10 mt-2 w-full flex justify-center text-gray-900"
+          className="flex gap-10 my-5 w-full flex justify-center text-gray-900"
         >
           <input
             type="text"
